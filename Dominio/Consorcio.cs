@@ -12,5 +12,10 @@ namespace Dominio
         public string Nombre { get; set; }
         public string Estado { get; set; }
         public int Activo { get; set; }
+
+        public override string ToString()
+        {
+            return Nombre;
+        }
     }
 }
