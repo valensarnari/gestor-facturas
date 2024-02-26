@@ -44,5 +44,76 @@ namespace Negocio
 				throw ex;
 			}
         }
+		public void modificar(Factura fact)
+		{
+            AccesoDatos acceso = new AccesoDatos();
+
+            try
+			{
+				acceso.setearConsulta("Update Factura set Proveedor = @Proveedor, Precio = @Precio, Numero = @Numero, Descripcion = @Descripcion, Aclaracion = @Aclaracion, Estado = @Estado, Mes = @Mes, Anio = @Anio, idConsorcio = @idConsorcio where Id = @Id");
+				acceso.setearParametro("@Proveedor", fact.Proveedor);
+                acceso.setearParametro("@Precio", fact.Precio);
+                acceso.setearParametro("@Numero", fact.Numero);
+                acceso.setearParametro("@Descripcion", fact.Descripcion);
+                acceso.setearParametro("@Aclaracion", fact.Aclaracion);
+                acceso.setearParametro("@Estado", fact.Estado);
+                acceso.setearParametro("@Mes", fact.Mes);
+                acceso.setearParametro("@Anio", fact.Anio);
+                acceso.setearParametro("@idConsorcio", fact.Consorcio.Id);
+                acceso.setearParametro("@Id", fact.Id);
+				acceso.ejecutarAccion();
+
+            }
+			catch (Exception ex)
+			{
+				throw ex;
+			}
+			finally
+			{
+                acceso.cerrarConexion();
+            }
+		}
+		public void agregar(Factura fact)
+		{
+			try
+			{
+				AccesoDatos acceso = new AccesoDatos();
+
+				acceso.setearConsulta("Insert into Factura (Proveedor, Precio, Numero, Descripcion, Aclaracion, Estado, Mes, Anio, idConsorcio) values (@Proveedor, @Precio, @Numero, @Descripcion, @Aclaracion, @Estado, @Mes, @Anio, @idConsorcio)");
+				acceso.setearParametro("@Proveedor", fact.Proveedor);
+                acceso.setearParametro("@Precio", fact.Precio);
+                acceso.setearParametro("@Numero", fact.Numero);
+                acceso.setearParametro("@Descripcion", fact.Descripcion);
+                acceso.setearParametro("@Aclaracion", fact.Aclaracion);
+                acceso.setearParametro("@Estado", fact.Estado);
+                acceso.setearParametro("@Mes", fact.Mes);
+                acceso.setearParametro("@Anio", fact.Anio);
+                acceso.setearParametro("@idConsorcio", fact.Consorcio.Id);
+				acceso.ejecutarAccion();
+
+				acceso.cerrarConexion();
+            }
+			catch (Exception ex)
+			{
+				throw ex;
+			}
+		}
+		public void eliminar(int id)
+		{
+			try
+			{
+				AccesoDatos acceso = new AccesoDatos();
+
+				acceso.setearConsulta("Update Factura set Activo = 0 where Id = @Id");
+				acceso.setearParametro("Id", id);
+				acceso.ejecutarAccion();
+
+				acceso.cerrarConexion();
+			}
+			catch (Exception ex)
+			{
+				throw ex;
+			}
+		}
     }
 }
